@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO</title>
+    <style>
+        body {
+            background-image: url(-\ Find\ &\ Share\ on\ GIPHY.gif);
+            min-height: 95vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #doto {
+            /* background-color: yellow; */
+            width: 400px;
+            height: auto;
+            margin: auto;
+            position: relative;
+            top: 50px;
+            border-radius: 25px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0px 0px 28px 1px rgb(84, 84, 84);
+        }
+
+        h1 {
+            text-align: center;
+            font-family: monospace;
+            font-size: 46px;
+        }
+
+        form {
+            text-align: center;
+
+        }
+
+        input {
+            padding: 15px;
+            border-radius: 10px;
+            position: relative;
+            top: -15px;
+            left: 85px;
+            font-family: cursive;
+            background-color: transparent;
+            font-style: italic;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+            top: -5px;
+            left: 175px;
+            font-family: cursive;
+            background-color: transparent;
+            /* border-style: none; */
+        }
+
+        ul li {
+            list-style: none;
+            font-size: 20px;
+            padding: 12px 8px 12px 50px;
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+            left: -36px;
+            top: -15px;
+            text-align: center;
+            font-family: cursive;
+        }
+
+        ul li::before {
+            background-color: whitesmoke;
+            border: 1px solid black;
+            content: ' ';
+            position: absolute;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            left: 18px;
+            /* background-image: url(right.png); */
+        }
+
+        ul li.complect {
+            text-decoration: line-through;
+        }
+
+        ul li.complect::before {
+            background-image: url(right-removebg-preview.png);
+        }
+
+        ul li span {
+            position: absolute;
+            right: 0;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        ul li span:hover {
+            color: red;
+        }
+
+        @media screen and (max-width:375px) {
+            #doto {
+                /* background-color: yellow; */
+                width: 370px;
+                height: auto;
+                margin: auto;
+                position: relative;
+                top: 50px;
+                border-radius: 25px;
+                backdrop-filter: blur(5px);
+                box-shadow: 0px 0px 28px 1px rgb(84, 84, 84);
+            }
+
+            input {
+                padding: 15px;
+                border-radius: 10px;
+                position: relative;
+                top: -15px;
+                left: 65px;
+                font-family: cursive;
+                background-color: transparent;
+                font-style: italic;
+                text-align: center;
+            }
+
+            button {
+                padding: 10px;
+                border-radius: 10px;
+                position: relative;
+                top: -5px;
+                left: 155px;
+                font-family: cursive;
+                background-color: transparent;
+                /* border-style: none; */
+            }
+        }
+
+        @media screen and (max-width:320px) {
+            body {
+                background-image: url(-\ Find\ &\ Share\ on\ GIPHY.gif);
+                min-height: 110vh;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="doto">
+        <h1>TO DO</h1>
+        <input type="text" id="input" placeholder="Enter Your Task"><br>
+        <button onclick="Jalge()">ADD</button>
+        <ul id="list">
+            <!-- <li class="complect">faizan</li> -->
+        </ul>
+        </form>
+    </div>
+</body>
+<script>
+    const inputbox = document.getElementById("input");
+    const list = document.getElementById("list");
+
+    function Jalge() {
+        if (inputbox.value === '') {
+            alert("Please Enter Your Task");
+        } else {
+            let li = document.createElement("li");
+            li.innerHTML = inputbox.value;
+            list.appendChild(li);
+
+            let worng = document.createElement("span");
+            worng.innerHTML = " X";
+            li.appendChild(worng);
+        }
+        inputbox.value = "";
+        saveData();
+    }
+
+    list.addEventListener("click", function (e) {
+        if (e.target.tagName === "LI") {
+            e.target.classList.toggle("complect");
+            saveData();
+        }
+        else if (e.target.tagName === "SPAN") {
+            e.target.parentElement.remove();
+            saveData();
+        }
+    }, false);
+    function saveData() {
+        localStorage.setItem("data", list.innerHTML);
+    }
+    function showData() {
+        list.innerHTML = localStorage.getItem("data");
+    }
+    showData();
+</script>
+
+</html>
